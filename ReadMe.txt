@@ -11,10 +11,7 @@ A responsive web-based scientific calculator inspired by Casio, built with HTML,
 ## Technologies
 - HTML
 - CSS (Flexbox, custom themes)
-- JavaScript (event handling, math functions)
-
-## Live Preview
-[Link to live site if hosted]
+- JavaScript (event handling, math function)
 
 ## Author
 Bafedi Winnie Malete
