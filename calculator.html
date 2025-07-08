@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MathC Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+  <div class="container">
+    <div class="top-bar">
+      <h1 class="brand">MathC</h1>
+      <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+    </div>
+
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+      <!-- Functional & Scientific -->
+      <button onclick="append('Math.PI')">π</button>
+      <button onclick="append('Math.E')">e</button>
+      <button onclick="append('Math.log10(')">log</button>
+      <button onclick="append('Math.log(')">ln</button>
+
+      <button onclick="append('Math.exp(')">exp</button>
+      <button onclick="append('**')">^</button>
+      <button onclick="append('Math.sqrt(')">√</button>
+      <button onclick="append('%')">%</button>
+
+      <!-- Memory & Utility -->
+      <button onclick="clearDisplay()">AC</button>
+      <button onclick="backspace()">⌫</button>
+      <button onclick="append('(')">(</button>
+      <button onclick="append(')')">)</button>
+
+      <!-- Digits and Operators -->
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('/')">÷</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('*')">×</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="calculate()" class="equal">=</button>
+      <button onclick="append('+')">+</button>
+
+      <!-- Trigonometric -->
+      <button onclick="append('Math.sin(')">sin</button>
+      <button onclick="append('Math.cos(')">cos</button>
+      <button onclick="append('Math.tan(')">tan</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Add character to display
+    function append(value) {
+      display.value += value;
+    }
+
+    // Clear all input
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    // Remove last character
+    function backspace() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    // Evaluate the expression
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    // Toggle dark/light mode
+    function toggleTheme() {
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+      themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (event) => {
+      const key = event.key;
+
+      if (!isNaN(key) || ['+', '-', '*', '/', '.', '%', '(', ')'].includes(key)) {
+        append(key);
+      } else if (key === 'Enter') {
+        calculate();
+      } else if (key === 'Backspace') {
+        backspace();
+      } else if (key === 'Escape') {
+        clearDisplay();
+      }
+    });
+  </script>
+</body>
+</html>
